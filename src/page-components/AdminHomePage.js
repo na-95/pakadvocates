@@ -5,7 +5,7 @@ export default class AdminHomePage extends Component {
     render() {
         return (
             <Container>
-                Hi
+                Hi This is the home page
             </Container>
         )
     }
