@@ -13,13 +13,17 @@ export default class SignUp extends Component {
         repeatPassword: ''
     }
 
-    formHandler = (e) => {
+    handleForm = (e) => {
         this.setState({
             [e.target.name]: e.target.value
         },
         () => {
             console.log(this.state)
         })
+    }
+
+    postForm = (e) => {
+        e.preventDefault()
     }
 
     render() {
@@ -30,24 +34,24 @@ export default class SignUp extends Component {
                         <h4 className="card-title mt-3 text-center">Create Account</h4>
                         <p className="text-center">Get started with your free account</p>
                         <hr/>
-                        <form>
+                        <form onSubmit={this.postForm}>
                             <div className="form-group input-group">
                                 <div className="input-group-prepend">
                                     <span className="input-group-text"> <i className="fa fa-user"></i> </span>
                                 </div>
-                                <input onChange={this.formHandler} required name="firstName" className="form-control" placeholder="First name" type="text"/>
+                                <input onChange={this.handleForm} required name="firstName" className="form-control" placeholder="First name" type="text"/>
                             </div>
                             <div className="form-group input-group">
                                 <div className="input-group-prepend">
                                     <span className="input-group-text"> <i className="fa fa-user"></i> </span>
                                 </div>
-                                <input onChange={this.formHandler} required name="lastName" className="form-control" placeholder="Last name" type="text"/>
+                                <input onChange={this.handleForm} required name="lastName" className="form-control" placeholder="Last name" type="text"/>
                             </div> 
                             <div className="form-group input-group">
                                 <div className="input-group-prepend">
                                     <span className="input-group-text"> <i className="fa fa-envelope"></i> </span>
                                 </div>
-                                <input onChange={this.formHandler} required name="email" className="form-control" placeholder="Email address" type="email"/>
+                                <input onChange={this.handleForm} required name="email" className="form-control" placeholder="Email address" type="email"/>
                             </div> 
                             <div className="form-group input-group">
                                 <div className="input-group-prepend">
@@ -59,13 +63,13 @@ export default class SignUp extends Component {
                                     <option value="2">+198</option>
                                     <option value="3">+701</option> */}
                                 </select>
-                                <input onChange={this.formHandler} required name="phoneNumber" className="form-control" placeholder="Phone number" type="text"/>
+                                <input onChange={this.handleForm} required name="phoneNumber" className="form-control" placeholder="Phone number" type="text"/>
                             </div>
                             <div className="form-group input-group">
                                 <div className="input-group-prepend">
                                     <span className="input-group-text"> <i className="fa fa-building"></i> </span>
                                 </div>
-                                <select onChange={this.formHandler} name="userType" required className="form-control">
+                                <select onChange={this.handleForm} name="userType" required className="form-control">
                                     <option value="" selected> Who are you?</option>
                                     <option value="client">Client</option>
                                     <option value="lawyer">Lawyer</option>
@@ -75,13 +79,13 @@ export default class SignUp extends Component {
                                 <div className="input-group-prepend">
                                     <span className="input-group-text"> <i className="fa fa-lock"></i> </span>
                                 </div>
-                                <input onChange={this.formHandler} name="password" required className="form-control" placeholder="Create password" type="password"/>
+                                <input onChange={this.handleForm} name="password" required className="form-control" placeholder="Create password" type="password"/>
                             </div> 
                             <div className="form-group input-group">
                                 <div className="input-group-prepend">
                                     <span className="input-group-text"> <i className="fa fa-lock"></i> </span>
                                 </div>
-                                <input onChange={this.formHandler} name="repeatPassword" required className="form-control" placeholder="Repeat password" type="password"/>
+                                <input onChange={this.handleForm} name="repeatPassword" required className="form-control" placeholder="Repeat password" type="password"/>
                             </div>                                      
                             <div className="form-group">
                                 <button type="submit" className="btn btn-primary btn-block"> Create Account  </button>
