@@ -38,12 +38,12 @@ if (db[modelName].associate) {
 });
 
 sequelize
-        .authenticate()
+    .authenticate()
         .then(() => {
-        console.log("Connection has been established succesfully---------------------------------------------------------------");
+            console.log("Connection has been established succesfully---------------------------------------------------------------");
         })
         .catch((err) => {
-        console.log("Unable to connect to the database---------------------------------------------------------------:", err);
+            console.log("Unable to connect to the database---------------------------------------------------------------:", err);
         })
 
 db.sequelize = sequelize;
@@ -60,13 +60,8 @@ db.Court = require('./Court')(sequelize, Sequelize);
 // db.user_invites.belongsTo(db.shops, { foreignKey: "shopId", as: "userInvites" });
 // db.shops.hasMany(db.user_invites, { foreignKey: "shopId", onDelete: 'cascade', hooks: true  });
 
-
 db.Court_Category.hasMany(db.Court, { foreignKey: "court_category_id", onDelete: 'cascade', hooks: true  });
 db.Admin.hasMany(db.Lawyer, { foreignKey: "approved_by_admin", onDelete: 'cascade', hooks: true  });
-
-
-
-
 
 
 module.exports = db;

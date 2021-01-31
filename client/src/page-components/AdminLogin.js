@@ -2,6 +2,7 @@ import React from 'react';
 import Axios from 'axios';
 import API from '../api/jsonPlaceholder';
 
+
 export default function AdminLogin() {
 
     // API.get('')
@@ -10,7 +11,7 @@ export default function AdminLogin() {
     //     })
 
     return (
-            <div className="wrapper fadeInDown">
+            <div className="admin-login-container wrapper fadeInDown">
                 <div id="formContent">
                     <div className="fadeIn first">
                         <div className='font-weight-bold h5 mt-4'>Admin Login</div>

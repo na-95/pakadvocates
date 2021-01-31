@@ -82,7 +82,7 @@ html {
   
   /* FORM TYPOGRAPHY*/
   
-  input[type=button], input[type=submit], input[type=reset]  {
+  .admin-login-container input[type=button], input[type=submit], input[type=reset]  {
     background-color: #56baed;
     border: none;
     color: white;
@@ -104,11 +104,11 @@ html {
     transition: all 0.3s ease-in-out;
   }
   
-  input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover  {
+  .admin-login-container input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover  {
     background-color: #39ace7;
   }
   
-  input[type=button]:active, input[type=submit]:active, input[type=reset]:active  {
+  .admin-login-container input[type=button]:active, input[type=submit]:active, input[type=reset]:active  {
     -moz-transform: scale(0.95);
     -webkit-transform: scale(0.95);
     -o-transform: scale(0.95);
@@ -116,7 +116,7 @@ html {
     transform: scale(0.95);
   }
   
-  input[type=text] {
+  .admin-login-container input[type=text] {
     background-color: #f6f6f6;
     border: none;
     color: #0d0d0d;
@@ -137,12 +137,12 @@ html {
     border-radius: 5px 5px 5px 5px;
   }
   
-  input[type=text]:focus {
+  .admin-login-container input[type=text]:focus {
     background-color: #fff;
     border-bottom: 2px solid #5fbae9;
   }
   
-  input[type=text]:placeholder {
+  .admin-login-container input[type=text]:placeholder {
     color: #cccccc;
   }
   
@@ -263,3 +263,61 @@ html {
   }
 
 /* ----------------------- LOGIN PAGE END ---------------------- */
+
+
+
+
+
+
+
+
+/* ----------------------- Header ----------------------- */
+
+.header-container {
+  border-bottom: 1px solid rgba(63, 56, 56, 0.267);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;}
+
+/* ----------------------- Header ----------------------- */
+
+
+
+
+
+
+
+
+
+/* ----------------------- Sign Up Page ----------------------- */
+
+.divider-text {
+  position: relative;
+  text-align: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.divider-text span {
+  padding: 7px;
+  font-size: 12px;
+  position: relative;   
+  z-index: 2;
+}
+.divider-text:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  border-bottom: 1px solid #ddd;
+  top: 55%;
+  left: 0;
+  z-index: 1;
+}
+
+.btn-facebook {
+  background-color: #405D9D;
+  color: #fff;
+}
+.btn-twitter {
+  background-color: #42AEEC;
+  color: #fff;
+}
+
+/* ----------------------- Sign Up Page ----------------------- */

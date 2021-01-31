@@ -3,34 +3,50 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/Header';
 import { Route, Switch } from 'react-router-dom';
 import { Router } from "react-router";
-import AdminLogin from './page-components/AdminLogin';
 import { createBrowserHistory } from "history";
+import {store} from './store';
+import {Provider} from "react-redux";
+import AdminLogin from './page-components/AdminLogin';
 import './custom-css/custom.css'
-import AdminHomePage from './page-components/AdminHomePage';
+import AdminPanel from './page-components/AdminPanel';
+import Homepage from './page-components/Homepage';
+import SignUp from './page-components/SignUp';
 
 const history = createBrowserHistory();
 
 function App() {
   return (
     <>
-      <Router history={history}>  
-        <Switch>
+      <Provider store={store}>
+        <Router history={history}>  
+          <Switch>
 
-          <Route exact path='/' component={AdminLogin}/>
+            <Route exact path="/admin">
+              <Router history={history}>
+                <main >
+                  <Switch>
+                    <Route exact path='/admin' component={AdminLogin}/>
+                    <Route exact path='/admin/AdminPanel' component={AdminPanel}/>
+                  </Switch>
+                </main>
+              </Router>
+            </Route>
 
-          <Router history={history}>
-            <header>
-              <Header/>
-            </header>
-            <main>
-              <Switch>
-                <Route path='/AdminHomePage' component={AdminHomePage}/>
-              </Switch>
-            </main>
-          </Router>
+            <Route path='/'>
+              <Router history={history}>
+                <Header/>
+                <main>
+                  <Switch>
+                    <Route exact path='/' component={Homepage}/>
+                    <Route exact path='/signup' component={SignUp} />
+                  </Switch>
+                </main>
+              </Router>
+            </Route>
 
-        </Switch>
-      </Router>
+          </Switch>
+        </Router>
+      </Provider>
     </>
   );
 }
