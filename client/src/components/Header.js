@@ -1,8 +1,15 @@
 import React from 'react';
 import { Navbar, Button, Nav, Form, FormControl, NavDropdown, Container } from 'react-bootstrap';
+import history from '../history'
 
 
 export default function Header() {
+
+    const handleRedirect = () => {
+
+        history.push('/signup')
+    }
+
     return (
         <header className="header-container">
             <Container  fluid>
@@ -12,8 +19,14 @@ export default function Header() {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="ml-auto">
-                            <Nav.Link href="#features">Sign Up</Nav.Link>
-                            <Nav.Link href="#pricing">Login</Nav.Link>
+                            <Button onClick={handleRedirect} className="mx-1 btn-secondary ">
+                                Register
+                                {/* <Nav.Link href="#features">Sign Up</Nav.Link> */}
+                            </Button>
+                            <Button className="mx-1 btn-primary ">
+                                Login
+                                {/* <Nav.Link href="#pricing">Login</Nav.Link> */}
+                            </Button>
                             {/* <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
                                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                                 <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>

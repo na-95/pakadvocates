@@ -3,7 +3,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/Header';
 import { Route, Switch } from 'react-router-dom';
 import { Router } from "react-router";
-import { createBrowserHistory } from "history";
 import {store} from './store';
 import {Provider} from "react-redux";
 import AdminLogin from './page-components/AdminLogin';
@@ -11,8 +10,7 @@ import './custom-css/custom.css'
 import AdminPanel from './page-components/AdminPanel';
 import Homepage from './page-components/Homepage';
 import SignUp from './page-components/SignUp';
-
-const history = createBrowserHistory();
+import history from './history'
 
 function App() {
   return (

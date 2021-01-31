@@ -28,11 +28,11 @@ export default class SignUp extends Component {
 
     render() {
         return (
-            <Container className="py-4 my-2">
+            <Container className="py-4 ">
                 <div className="card bg-light">
                     <article className="card-body mx-auto" style={{maxWidth: "max-width: 400px;"}}>
                         <h4 className="card-title mt-3 text-center">Create Account</h4>
-                        <p className="text-center">Get started with your free account</p>
+                        <p className="text-center">Get started with your free <b>PakAdvocates</b> account</p>
                         <hr/>
                         <form onSubmit={this.postForm}>
                             <div className="form-group input-group">
