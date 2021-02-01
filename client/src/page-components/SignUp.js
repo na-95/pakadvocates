@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Container } from 'react-bootstrap';
+import {connect} from "react-redux";
+import { postNewLawyer } from '../actions';
 
-export default class SignUp extends Component {
+class SignUp extends Component {
     
     state = {
         firstName: '',
@@ -22,8 +24,26 @@ export default class SignUp extends Component {
         })
     }
 
-    postForm = (e) => {
+    submitForm = (e) => {
         e.preventDefault()
+
+        // cancel submit if passwords dont match:
+        if(this.state.password !== this.state.repeatPassword){
+            alert("Passwords don't match. Please try again.");
+            return;
+        }
+
+        let lawyer = {
+            first_name: this.state.firstName,
+            last_name: this.state.lastName,
+            email: this.state.email,
+            phone_number: this.state.phoneNumber,
+            password: this.state.password,
+            approval_status: 0
+        }
+
+        // call action that makes the API post call:
+        this.props.postNewLawyer(lawyer, '/thankyou')
     }
 
     render() {
@@ -34,7 +54,7 @@ export default class SignUp extends Component {
                         <h4 className="card-title mt-3 text-center">Create Account</h4>
                         <p className="text-center">Get started with your free <b>PakAdvocates</b> account</p>
                         <hr/>
-                        <form onSubmit={this.postForm}>
+                        <form onSubmit={this.submitForm}>
                             <div className="form-group input-group">
                                 <div className="input-group-prepend">
                                     <span className="input-group-text"> <i className="fa fa-user"></i> </span>
@@ -98,3 +118,5 @@ export default class SignUp extends Component {
         )
     }
 }
+
+export default connect(null, { postNewLawyer })(SignUp)

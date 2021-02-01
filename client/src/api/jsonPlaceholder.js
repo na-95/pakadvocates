@@ -3,5 +3,5 @@ import config from '../config/config';
 
 
 export default axios.create({
-    baseURL: `${config.BASE_URL}/`
+    baseURL: `${config.BASE_URL}/api`
 })

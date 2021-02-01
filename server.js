@@ -5,6 +5,8 @@ const express = require('express');
 const app = express();
 
 const bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 const path = require('path');
 
@@ -31,8 +33,6 @@ app.listen(port, ()=>{console.log(`Server started on port ${port}`)})
 
 
 
-
-
 // importing and syncing (creating the actual) database:
 
 const db = require('./app/models')
@@ -52,4 +52,4 @@ const db = require('./app/models')
 
 // API routes/endpoints with services:
 
-app.use('/', require('./app/routes/Admin-routes'));
+app.use('/api/lawyer', require('./app/routes/Lawyer-routes'));

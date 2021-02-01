@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navbar, Button, Nav, Form, FormControl, NavDropdown, Container } from 'react-bootstrap';
-import history from '../history'
+import history from '../history';
+import { Link } from 'react-router-dom';
 
 
 export default function Header() {
@@ -14,7 +15,9 @@ export default function Header() {
         <header className="header-container">
             <Container  fluid>
                 <Navbar className="py-3 d-flex" collapseOnSelect expand="lg" bg="white" variant="light">
-                    <Navbar.Brand href="#home">PakAdvocates</Navbar.Brand>
+                    <Navbar.Brand href="#home">
+                        <Link to='/'>PakAdvocates</Link>
+                    </Navbar.Brand>
                     <div className="flex-grow-1"></div>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">

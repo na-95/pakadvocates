@@ -11,6 +11,7 @@ import AdminPanel from './page-components/AdminPanel';
 import Homepage from './page-components/Homepage';
 import SignUp from './page-components/SignUp';
 import history from './history'
+import ThankYou from './page-components/ThankYou';
 
 function App() {
   return (
@@ -35,8 +36,9 @@ function App() {
                 <Header/>
                 <main>
                   <Switch>
-                    <Route exact path='/' component={Homepage}/>
+                    <Route exact path='/' component={Homepage} />
                     <Route exact path='/signup' component={SignUp} />
+                    <Route exact path='/thankyou' component={ThankYou} />
                   </Switch>
                 </main>
               </Router>
