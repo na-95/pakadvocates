@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container } from 'react-bootstrap';
 import {connect} from "react-redux";
-import { postNewLawyer } from '../actions';
+import { postLawyer } from '../actions';
 
 class SignUp extends Component {
     
@@ -43,14 +43,14 @@ class SignUp extends Component {
         }
 
         // call action that makes the API post call:
-        this.props.postNewLawyer(lawyer, '/thankyou')
+        this.props.postLawyer(lawyer, '/thankyou')
     }
 
     render() {
         return (
             <Container className="py-4 ">
                 <div className="card bg-light">
-                    <article className="card-body mx-auto" style={{maxWidth: "max-width: 400px;"}}>
+                    <article className="card-body mx-auto" style={{maxWidth: '400px'}}>
                         <h4 className="card-title mt-3 text-center">Create Account</h4>
                         <p className="text-center">Get started with your free <b>PakAdvocates</b> account</p>
                         <hr/>
@@ -77,7 +77,7 @@ class SignUp extends Component {
                                 <div className="input-group-prepend">
                                     <span className="input-group-text"> <i className="fa fa-phone"></i> </span>
                                 </div>
-                                <select className="custom-select" style={{maxWidth: "max-width: 120px;"}}>
+                                <select className="custom-select" style={{maxWidth: '120px'}}>
                                     <option selected="">+92</option>
                                     {/* <option value="1">+972</option>
                                     <option value="2">+198</option>
@@ -119,4 +119,4 @@ class SignUp extends Component {
     }
 }
 
-export default connect(null, { postNewLawyer })(SignUp)
+export default connect(null, { postLawyer })(SignUp)

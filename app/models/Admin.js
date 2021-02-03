@@ -1,7 +1,3 @@
-// const { Sequelize, DataTypes } = require('sequelize');
-// const db = require('../config/db-config');  // importing the db
-
-
 module.exports = (sequelize, DataTypes) => {
 
     const Admin = sequelize.define("Admin", {

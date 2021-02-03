@@ -2,13 +2,26 @@ import React from 'react';
 import { Navbar, Button, Nav, Form, FormControl, NavDropdown, Container } from 'react-bootstrap';
 import history from '../history';
 import { Link } from 'react-router-dom';
+import {connect} from "react-redux";
+import { logoutAdmin } from '../actions';
 
+function HeaderAdmin(props) {
 
-export default function Header() {
+    console.log('header rendered')
 
-    const handleRedirect = () => {
+    const handleRedirect = (path) => (e) => {
+        e.preventDefault();
+        history.push(`/admin/${path}`);
+    }
 
-        history.push('/signup')
+    const handeLogout = (e) => {
+        e.preventDefault();
+
+        if(window.confirm('Are you sure you want to logout?')){
+            history.push(`/admin`);
+            props.logoutAdmin()
+        }
+
     }
 
     return (
@@ -22,14 +35,13 @@ export default function Header() {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="ml-auto">
-                            <Button onClick={handleRedirect} className="mx-1 btn-secondary ">
-                                Register
-                                {/* <Nav.Link href="#features">Sign Up</Nav.Link> */}
-                            </Button>
-                            <Button className="mx-1 btn-primary ">
-                                Login
-                                {/* <Nav.Link href="#pricing">Login</Nav.Link> */}
-                            </Button>
+                            {
+                                history.location.pathname !== '/admin/adminpanel' && <Nav.Link onClick={handleRedirect('adminpanel')}>Go Back To Admin Panel</Nav.Link>
+                            }
+                            <Nav.Link onClick={handleRedirect('lawyerrequests')}>View Lawyer Requests</Nav.Link>
+                            <Nav.Link >View All Lawyers</Nav.Link>
+                            <Nav.Link >Add Courts</Nav.Link>
+                            <Nav.Link onClick={handeLogout}>Logout</Nav.Link>
                             {/* <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
                                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                                 <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
@@ -44,3 +56,6 @@ export default function Header() {
         </header>
     )
 }
+
+export default connect(null, {logoutAdmin})(HeaderAdmin);
+

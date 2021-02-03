@@ -52,4 +52,5 @@ const db = require('./app/models')
 
 // API routes/endpoints with services:
 
-app.use('/api/lawyer', require('./app/routes/Lawyer-routes'));
+app.use('/api/lawyer', require('./app/routes/Lawyer-routes'));  // this imports the router (aka the mini app) created in the specified path.
+app.use('/api/admin', require('./app/routes/Admin-routes'));  // this imports the router (aka the mini app) created in the specified path.

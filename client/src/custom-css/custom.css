@@ -275,7 +275,12 @@ html {
 
 .header-container {
   border-bottom: 1px solid rgba(63, 56, 56, 0.267);
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;}
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.header-container #brand-logo:hover{
+  text-decoration: none;
+}
 
 /* ----------------------- Header ----------------------- */
 
@@ -321,3 +326,12 @@ html {
 }
 
 /* ----------------------- Sign Up Page ----------------------- */
+
+
+/* LawyerRequests */
+.requests-list li {
+  list-style: none;
+  
+}
+/* LawyerRequests */
+

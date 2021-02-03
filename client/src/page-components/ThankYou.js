@@ -5,7 +5,7 @@ export default function ThankYou() {
     return (
             <Container className="py-4 ">
                 <div className="card bg-light">
-                    <article className="card-body mx-auto" style={{maxWidth: "max-width: 400px;"}}>
+                    <article className="card-body mx-auto" style={{maxWidth: "400px;"}}>
                         <h4 className="card-title mt-3 text-center">Create Account</h4>
                         <p className="text-center">Get started with your free <b>PakAdvocates</b> account</p>
                         <hr/>

@@ -12,23 +12,30 @@ import Homepage from './page-components/Homepage';
 import SignUp from './page-components/SignUp';
 import history from './history'
 import ThankYou from './page-components/ThankYou';
+import HeaderAdmin from './components/HeaderAdmin';
+import LawyerRequests from './components/LawyerRequests';
 
-function App() {
+function App(props) {
   return (
     <>
       <Provider store={store}>
         <Router history={history}>  
           <Switch>
 
-            <Route exact path="/admin">
-              <Router history={history}>
-                <main >
-                  <Switch>
-                    <Route exact path='/admin' component={AdminLogin}/>
-                    <Route exact path='/admin/AdminPanel' component={AdminPanel}/>
-                  </Switch>
-                </main>
-              </Router>
+            <Route path="/admin">
+              <Switch>
+                <Route exact path='/admin' component={AdminLogin}/>
+                <Router history={history} basename="/admin">
+                  {/* <HeaderAdmin/> */}
+                  <Route path='/' component={HeaderAdmin}/>
+                  <main >
+                    {/* <Switch> */}
+                      <Route exact path='/adminpanel' component={AdminPanel}/>
+                      <Route exact path='/lawyerrequests' component={LawyerRequests}/>
+                    {/* </Switch> */}
+                  </main>
+                </Router>
+              </Switch>
             </Route>
 
             <Route path='/'>
