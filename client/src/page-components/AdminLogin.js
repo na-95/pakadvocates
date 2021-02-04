@@ -50,7 +50,7 @@ class AdminLogin extends Component {
                     </div>
                     <form onSubmit={this.postForm}>
                         <input onChange={this.handleForm} type="text" id="username" className="fadeIn second" name="username" placeholder="login"/>
-                        <input onChange={this.handleForm} type="text" id="password" className="fadeIn third" name="password" placeholder="password"/>
+                        <input onChange={this.handleForm} type="password" id="password" className="fadeIn third" name="password" placeholder="password"/>
                         <div className="text-danger">{loginFailFlag && invalidMessage}</div>
                         <input type="submit" className="fadeIn fourth" value="Log In"/>
                     </form>

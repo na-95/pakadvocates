@@ -116,7 +116,8 @@ html {
     transform: scale(0.95);
   }
   
-  .admin-login-container input[type=text] {
+  .admin-login-container input[type=text],
+  .admin-login-container input[type=password] {
     background-color: #f6f6f6;
     border: none;
     color: #0d0d0d;
@@ -137,12 +138,14 @@ html {
     border-radius: 5px 5px 5px 5px;
   }
   
-  .admin-login-container input[type=text]:focus {
+  .admin-login-container input[type=text]:focus,
+  .admin-login-container input[type=password]:focus {
     background-color: #fff;
     border-bottom: 2px solid #5fbae9;
   }
   
-  .admin-login-container input[type=text]:placeholder {
+  .admin-login-container input[type=text]:placeholder,
+  .admin-login-container input[type=password]:placeholder {
     color: #cccccc;
   }
   

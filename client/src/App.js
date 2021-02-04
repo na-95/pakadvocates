@@ -13,7 +13,8 @@ import SignUp from './page-components/SignUp';
 import history from './history'
 import ThankYou from './page-components/ThankYou';
 import HeaderAdmin from './components/HeaderAdmin';
-import LawyerRequests from './components/LawyerRequests';
+import LawyerRequests from './page-components/LawyerRequests';
+import AddCourtCategory from './page-components/AddCourtCategory';
 
 function App(props) {
   return (
@@ -25,13 +26,14 @@ function App(props) {
             <Route path="/admin">
               <Switch>
                 <Route exact path='/admin' component={AdminLogin}/>
-                <Router history={history} basename="/admin">
+                <Router history={history}>
                   {/* <HeaderAdmin/> */}
                   <Route path='/' component={HeaderAdmin}/>
                   <main >
                     {/* <Switch> */}
-                      <Route exact path='/adminpanel' component={AdminPanel}/>
-                      <Route exact path='/lawyerrequests' component={LawyerRequests}/>
+                      <Route exact path='/admin/adminpanel' component={AdminPanel}/>
+                      <Route exact path='/admin/lawyerrequests' component={LawyerRequests}/>
+                      <Route exact path='/admin/addcourtcategory' component={AddCourtCategory}/>
                     {/* </Switch> */}
                   </main>
                 </Router>

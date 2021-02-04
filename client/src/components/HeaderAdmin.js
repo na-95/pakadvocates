@@ -40,7 +40,7 @@ function HeaderAdmin(props) {
                             }
                             <Nav.Link onClick={handleRedirect('lawyerrequests')}>View Lawyer Requests</Nav.Link>
                             <Nav.Link >View All Lawyers</Nav.Link>
-                            <Nav.Link >Add Courts</Nav.Link>
+                            <Nav.Link onClick={handleRedirect('addcourtcategory')}>Add Court Categories</Nav.Link>
                             <Nav.Link onClick={handeLogout}>Logout</Nav.Link>
                             {/* <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
                                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
