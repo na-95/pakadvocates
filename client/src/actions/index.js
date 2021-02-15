@@ -18,13 +18,17 @@ export const postLawyer = (lawyer, path) => dispatch => {
 export const deleteLawyer = (lawyerId) => dispatch => {
 
     return API.delete(`/lawyer/${lawyerId}`)
-        .then(res => {
-            console.log('Lawyer request deleted', res.data);
-        })
         .catch(err => {
             console.log('Error: Could not delete lawyer request.');
         })
-        
+
+}
+
+export const putLawyer = (lawyer, lawyerId) => dispatch => {
+    return API.put(`/lawyer/${lawyerId}`, lawyer)
+        .catch(err => {
+            console.log('Error updating lawyer approval status. API call failed.')
+        })
 }
 
 export const getUnapprovedLawyers = () => dispatch => {
@@ -52,7 +56,7 @@ export const adminLoginVerify = (admin, path) => dispatch => {
             console.log('Admin found:', res.data);
             history.push(path);
 
-            let {data:admin} = res;
+            let { data: admin } = res;
 
             delete admin.password;
 
@@ -61,6 +65,7 @@ export const adminLoginVerify = (admin, path) => dispatch => {
                 admin
             })
         })
+
 }
 
 export const logoutAdmin = () => (
@@ -68,3 +73,34 @@ export const logoutAdmin = () => (
         type: 'ADMIN_LOGOUT',
     }
 )
+
+export const postCourtCategory = (courtCategory) => dispatch => {
+
+    return API.post(`/courtCategory`, courtCategory)
+        .catch(err => {
+            console.log('Error: Could not create court category. API call failed.');
+        })
+
+}
+
+export const deleteCourtCategory = (courtCategoryId) => dispatch => {
+    return API.delete(`/courtCategory/${courtCategoryId}`)
+        .catch(err => {
+            console.log('Error: Could not delete court category. API call failed.');
+        })
+}
+
+export const getCourtCategories = () => dispatch => {
+    API.get(`/courtCategory`)
+        .then(res => {
+            console.log('-----------------------GET court catgories', res);
+            dispatch({
+                type: 'GET_COURT_CATEGORIES',
+                courtCategories: [...res.data]
+            })
+        })
+        .catch(err => {
+            console.log('Error: Could not get court categories. API call failed.');
+        })
+}
+

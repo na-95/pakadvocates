@@ -331,10 +331,30 @@ html {
 /* ----------------------- Sign Up Page ----------------------- */
 
 
-/* LawyerRequests */
+
+
+
+
+/* -----------------------LawyerRequests----------------------- */
 .requests-list li {
   list-style: none;
   
 }
-/* LawyerRequests */
+/* -----------------------LawyerRequests----------------------- */
 
+
+
+
+
+/* -----------------------AddCourtCategory Page----------------------- */
+.times-icon{
+  transition: all 0.5s;
+}
+
+.times-icon:hover{
+  color: red;
+  transition: all 0.3s ease;
+
+}
+
+/* -----------------------AddCourtCategory Page----------------------- */

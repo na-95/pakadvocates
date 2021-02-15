@@ -16,10 +16,10 @@ router.post('/', (req, res) => {
     };
 
     Lawyer.create(lawyer)
-        .then(data =>{
+        .then(data => {
             res.send(data)
         })
-        .catch(err=> {
+        .catch(err => {
             res.status(500).send({
                 message:
                     err.message || "Error: Lawyer could not be created."
@@ -45,28 +45,54 @@ router.get('/byApprovalStatus/:approvalStatus', async (req, res) => {
 
 // DELETE lawyer:
 router.delete('/:lawyerId', (req, res) => {
-        const id = req.params.lawyerId;
-        
-        Lawyer.destroy({
-            where: { id: id }
-        })
-            .then(num => {
-                if (num == 1) {
-                    res.send({
-                        message: "Lawyer was deleted successfully."
-                    });
-                } else {
-                    res.send({
-                        message: `Cannot delete Lawyer with id=${id}. Please check Lawyer Id.`
-                    });
-                }
-            })
-            .catch(err=>{
-                res.status(500).send({
-                    message:
-                        err.message || "Error deleting Lawyer with id=" + id
+    const id = req.params.lawyerId;
+
+    Lawyer.destroy({
+        where: { id: id }
+    })
+        .then(num => {
+            if (num == 1) {
+                res.send({
+                    message: "Lawyer was deleted successfully."
                 });
+            } else {
+                res.send({
+                    message: `Cannot delete Lawyer with id=${id}. Please check Lawyer Id.`
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Error deleting Lawyer with id=" + id
             });
+        });
+})
+
+// Update lawyer:
+router.put('/:lawyerId', (req, res) => {
+    const id = req.params.lawyerId;
+
+    Lawyer.update(req.body, {
+        where: { id: id }
+    })
+        .then(num => {
+            if (num == 1) {
+                res.send({
+                    message: "Lawyer was updated successfully."
+                });
+            } else {
+                res.send({
+                    message: `Cannot update Lawyer with id=${id}. Please check Lawyer Id.`
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Error approving Lawyer with id=" + id
+            });
+        });
 })
 
 module.exports = router;

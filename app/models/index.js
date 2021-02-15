@@ -15,7 +15,7 @@ let sequelize;
 //     sequelize = new Sequelize(config.database, config.username, config.password, config);
 // }
 
-sequelize = new Sequelize('pakadvocates', 'root', 'pakistan', {
+sequelize = new Sequelize('pakadvocates', 'root', '', {
     host: 'localhost',
     dialect: 'mysql'
 });
@@ -32,19 +32,19 @@ fs
     });
 
 Object.keys(db).forEach((modelName) => {
-if (db[modelName].associate) {
-    db[modelName].associate(db);
-}
+    if (db[modelName].associate) {
+        db[modelName].associate(db);
+    }
 });
 
 sequelize
     .authenticate()
-        .then(() => {
-            console.log("Connection has been established succesfully---------------------------------------------------------------");
-        })
-        .catch((err) => {
-            console.log("Unable to connect to the database---------------------------------------------------------------:", err);
-        })
+    .then(() => {
+        console.log("Connection has been established succesfully---------------------------------------------------------------");
+    })
+    .catch((err) => {
+        console.log("Unable to connect to the database---------------------------------------------------------------:", err);
+    })
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
@@ -60,8 +60,8 @@ db.Court = require('./Court')(sequelize, Sequelize);
 // db.user_invites.belongsTo(db.shops, { foreignKey: "shopId", as: "userInvites" });
 // db.shops.hasMany(db.user_invites, { foreignKey: "shopId", onDelete: 'cascade', hooks: true  });
 
-db.Court_Category.hasMany(db.Court, { foreignKey: "court_category_id", onDelete: 'cascade', hooks: true  });
-db.Admin.hasMany(db.Lawyer, { foreignKey: "approved_by_admin", onDelete: 'cascade', hooks: true  });
+db.Court_Category.hasMany(db.Court, { foreignKey: "court_category_id", onDelete: 'cascade', hooks: true });
+db.Admin.hasMany(db.Lawyer, { foreignKey: "approved_by_admin", onDelete: 'cascade', hooks: true });
 
 
 module.exports = db;

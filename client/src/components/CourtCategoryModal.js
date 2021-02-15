@@ -18,17 +18,17 @@ export default class CourtCategoryModal extends Component {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <form className="w-75 mx-auto">
-                            <div className="form-group input-group">
-                                <div className="input-group-prepend">
-                                    <span className="input-group-text"> <i className="fas fa-balance-scale"></i> </span>
-                                </div>
-                                <input required name="courtCategory" className="form-control" placeholder="Category name" type="text"/>
-                            </div>                                 
-                            <div className="form-group">
-                                <button type="submit" className="btn btn-primary mx-auto btn-block w-50"> Create Category  </button>
-                            </div>      
-                        </form>
+                    <form className="w-75 mx-auto" onSubmit={this.props.submitForm}>
+                        <div className="form-group input-group">
+                            <div className="input-group-prepend">
+                                <span className="input-group-text"> <i className="fas fa-balance-scale"></i> </span>
+                            </div>
+                            <input required name="courtCategory" className="form-control" placeholder="Category name" type="text" onChange={this.props.handleForm} />
+                        </div>
+                        <div className="form-group">
+                            <button type="submit" className="btn btn-primary mx-auto btn-block w-50"> Create Category  </button>
+                        </div>
+                    </form>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={this.props.onHide}>Close</Button>
