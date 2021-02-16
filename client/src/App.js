@@ -3,8 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/Header';
 import { Route, Switch } from 'react-router-dom';
 import { Router } from "react-router";
-import {store} from './store';
-import {Provider} from "react-redux";
+import { store } from './store';
+import { Provider } from "react-redux";
 import AdminLogin from './page-components/AdminLogin';
 import './custom-css/custom.css'
 import AdminPanel from './page-components/AdminPanel';
@@ -15,25 +15,27 @@ import ThankYou from './page-components/ThankYou';
 import HeaderAdmin from './components/HeaderAdmin';
 import LawyerRequests from './page-components/LawyerRequests';
 import AddCourtCategory from './page-components/AddCourtCategory';
+import ApprovedLawyers from './page-components/ApprovedLawyers';
 
 function App(props) {
   return (
     <>
       <Provider store={store}>
-        <Router history={history}>  
+        <Router history={history}>
           <Switch>
 
             <Route path="/admin">
               <Switch>
-                <Route exact path='/admin' component={AdminLogin}/>
+                <Route exact path='/admin' component={AdminLogin} />
                 <Router history={history}>
                   {/* <HeaderAdmin/> */}
-                  <Route path='/' component={HeaderAdmin}/>
+                  <Route path='/' component={HeaderAdmin} />
                   <main >
                     {/* <Switch> */}
-                      <Route exact path='/admin/adminpanel' component={AdminPanel}/>
-                      <Route exact path='/admin/lawyerrequests' component={LawyerRequests}/>
-                      <Route exact path='/admin/addcourtcategory' component={AddCourtCategory}/>
+                    <Route exact path='/admin/adminpanel' component={AdminPanel} />
+                    <Route exact path='/admin/lawyerrequests' component={LawyerRequests} />
+                    <Route exact path='/admin/approvedlawyers' component={ApprovedLawyers} />
+                    <Route exact path='/admin/addcourtcategory' component={AddCourtCategory} />
                     {/* </Switch> */}
                   </main>
                 </Router>
@@ -42,7 +44,7 @@ function App(props) {
 
             <Route path='/'>
               <Router history={history}>
-                <Header/>
+                <Header />
                 <main>
                   <Switch>
                     <Route exact path='/' component={Homepage} />

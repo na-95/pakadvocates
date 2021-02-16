@@ -2,7 +2,7 @@ import React from 'react';
 import { Navbar, Button, Nav, Form, FormControl, NavDropdown, Container } from 'react-bootstrap';
 import history from '../history';
 import { Link } from 'react-router-dom';
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import { logoutAdmin } from '../actions';
 
 function HeaderAdmin(props) {
@@ -17,7 +17,7 @@ function HeaderAdmin(props) {
     const handeLogout = (e) => {
         e.preventDefault();
 
-        if(window.confirm('Are you sure you want to logout?')){
+        if (window.confirm('Are you sure you want to logout?')) {
             history.push(`/admin`);
             props.logoutAdmin()
         }
@@ -26,7 +26,7 @@ function HeaderAdmin(props) {
 
     return (
         <header className="header-container">
-            <Container  fluid>
+            <Container fluid>
                 <Navbar className="py-3 d-flex" collapseOnSelect expand="lg" bg="white" variant="light">
                     <Navbar.Brand href="#home">
                         <Link id='brand-logo' to='/'>PakAdvocates</Link>
@@ -39,7 +39,7 @@ function HeaderAdmin(props) {
                                 history.location.pathname !== '/admin/adminpanel' && <Nav.Link onClick={handleRedirect('adminpanel')}>Go Back To Admin Panel</Nav.Link>
                             }
                             <Nav.Link onClick={handleRedirect('lawyerrequests')}>View Lawyer Requests</Nav.Link>
-                            <Nav.Link >View All Lawyers</Nav.Link>
+                            <Nav.Link onClick={handleRedirect('approvedlawyers')}>View Approved Lawyers</Nav.Link>
                             <Nav.Link onClick={handleRedirect('addcourtcategory')}>Add Court Categories</Nav.Link>
                             <Nav.Link onClick={handeLogout}>Logout</Nav.Link>
                             {/* <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
@@ -57,5 +57,5 @@ function HeaderAdmin(props) {
     )
 }
 
-export default connect(null, {logoutAdmin})(HeaderAdmin);
+export default connect(null, { logoutAdmin })(HeaderAdmin);
 

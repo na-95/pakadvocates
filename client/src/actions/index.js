@@ -46,6 +46,22 @@ export const getUnapprovedLawyers = () => dispatch => {
             console.log('Error: Could not get all pending lawyers.')
         })
 
+}
+
+export const getApprovedLawyers = () => dispatch => {
+
+    API.get('/lawyer/byApprovalStatus/1')
+        .then(res => {
+            console.log('All approved lawyers retrieved.')
+
+            dispatch({
+                type: 'GET_APPROVED_LAWYERS',
+                approvedLawyers: [...res.data]
+            })
+        })
+        .catch(err => {
+            console.log('Error: Could not get all approved lawyers.')
+        })
 
 }
 

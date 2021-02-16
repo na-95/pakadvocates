@@ -3,7 +3,7 @@ import { Button, ButtonGroup, Container } from 'react-bootstrap';
 import { connect } from "react-redux";
 import { getUnapprovedLawyers, deleteLawyer, putLawyer } from '../actions';
 
-let unapprovedLawyers = [];
+let unapprovedLawyers;
 const mapStateToProps = state => {
     unapprovedLawyers = state.LawyerReducer.unapprovedLawyers;
 
@@ -35,7 +35,6 @@ class LawyerRequests extends Component {
                 <div className="card bg-light">
                     <article className="card-body mx-auto" style={{ maxWidth: "600px" }}>
                         <h4 className="card-title mt-3 text-center">Approve/Reject Pending Lawyer Requests</h4>
-                        {/* <p className="text-center">Get started with your free <b>PakAdvocates</b> account</p> */}
                         <hr />
                         <ul className="requests-list p-0" >
                             {
@@ -46,10 +45,6 @@ class LawyerRequests extends Component {
                                         <span className="list-group-item">{`${item.email}`}</span>
                                         <span role="button" className="text-center font-weight-bold text-dark list-group-item list-group-item-success" onClick={this.acceptLawyerRequest(item.id.toString())}>Approve</span>
                                         <span role="button" className="text-center font-weight-bold text-dark list-group-item list-group-item-danger" onClick={this.rejectLawyerRequest(item.id.toString())}>Reject</span>
-                                        {/* <ButtonGroup className='mt-1'>
-                                            <Button className="btn-success ">Approve</Button>
-                                            <Button className="btn-danger " onClick={this.deleteLawyerRequest(item.id.toString())}>Reject</Button>
-                                        </ButtonGroup> */}
                                     </li>
                                 ))
                             }
