@@ -15,13 +15,13 @@
 
 
 // for local testing:
-// module.exports = {
-//     BASE_URL: "http://localhost:5000",
-//     BASENAME: '/client'
-// };
-
-// for heroku:
 module.exports = {
-    BASE_URL: "https://pakadvocates.herokuapp.com",
+    BASE_URL: "http://localhost:5000",
     BASENAME: '/client'
 };
+
+// for heroku:
+// module.exports = {
+//     BASE_URL: "https://pakadvocates.herokuapp.com",
+//     BASENAME: '/client'
+// };
