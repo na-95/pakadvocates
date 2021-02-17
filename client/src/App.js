@@ -16,6 +16,7 @@ import HeaderAdmin from './components/HeaderAdmin';
 import LawyerRequests from './page-components/LawyerRequests';
 import AddCourtCategory from './page-components/AddCourtCategory';
 import ApprovedLawyers from './page-components/ApprovedLawyers';
+import config from './config/config';
 
 function App(props) {
   return (
@@ -24,32 +25,32 @@ function App(props) {
         <Router history={history}>
           <Switch>
 
-            <Route path="/admin">
+            <Route path={`${config.BASENAME}/admin`}>
               <Switch>
-                <Route exact path='/admin' component={AdminLogin} />
+                <Route exact path={`${config.BASENAME}/admin`} component={AdminLogin} />
                 <Router history={history}>
                   {/* <HeaderAdmin/> */}
-                  <Route path='/' component={HeaderAdmin} />
+                  <Route path={`${config.BASENAME}/`} component={HeaderAdmin} />
                   <main >
                     {/* <Switch> */}
-                    <Route exact path='/admin/adminpanel' component={AdminPanel} />
-                    <Route exact path='/admin/lawyerrequests' component={LawyerRequests} />
-                    <Route exact path='/admin/approvedlawyers' component={ApprovedLawyers} />
-                    <Route exact path='/admin/addcourtcategory' component={AddCourtCategory} />
+                    <Route exact path={`${config.BASENAME}/admin/adminpanel`} component={AdminPanel} />
+                    <Route exact path={`${config.BASENAME}/admin/lawyerrequests`} component={LawyerRequests} />
+                    <Route exact path={`${config.BASENAME}/admin/approvedlawyers`} component={ApprovedLawyers} />
+                    <Route exact path={`${config.BASENAME}/admin/addcourtcategory`} component={AddCourtCategory} />
                     {/* </Switch> */}
                   </main>
                 </Router>
               </Switch>
             </Route>
 
-            <Route path='/'>
+            <Route path={`${config.BASENAME}/`} >
               <Router history={history}>
                 <Header />
                 <main>
                   <Switch>
-                    <Route exact path='/' component={Homepage} />
-                    <Route exact path='/signup' component={SignUp} />
-                    <Route exact path='/thankyou' component={ThankYou} />
+                    <Route exact path={`${config.BASENAME}/`} component={Homepage} />
+                    <Route exact path={`${config.BASENAME}/signup`} component={SignUp} />
+                    <Route exact path={`${config.BASENAME}/thankyou`} component={ThankYou} />
                   </Switch>
                 </main>
               </Router>

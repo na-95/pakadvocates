@@ -7,7 +7,7 @@ export const postLawyer = (lawyer, path) => dispatch => {
     API.post('/lawyer/', lawyer)
         .then(res => {
             console.log('New lawyer created:', res.data);
-            history.push(path);
+            history.push(config.BASENAME + path);
         })
         .catch(err => {
             console.log('Error: Could not create new lawyer.');
@@ -70,7 +70,7 @@ export const adminLoginVerify = (admin, path) => dispatch => {
     return API.post('/admin/login', admin)
         .then(res => {
             console.log('Admin found:', res.data);
-            history.push(path);
+            history.push(config.BASENAME + path);
 
             let { data: admin } = res;
 

@@ -4,6 +4,7 @@ import history from '../history';
 import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
 import { logoutAdmin } from '../actions';
+import config from '../config/config';
 
 function HeaderAdmin(props) {
 
@@ -11,14 +12,14 @@ function HeaderAdmin(props) {
 
     const handleRedirect = (path) => (e) => {
         e.preventDefault();
-        history.push(`/admin/${path}`);
+        history.push(`${config.BASENAME}/admin/${path}`);
     }
 
     const handeLogout = (e) => {
         e.preventDefault();
 
         if (window.confirm('Are you sure you want to logout?')) {
-            history.push(`/admin`);
+            history.push(`${config.BASENAME}/admin`);
             props.logoutAdmin()
         }
 

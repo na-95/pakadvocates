@@ -2,18 +2,19 @@ import React from 'react';
 import { Navbar, Button, Nav, Form, FormControl, NavDropdown, Container } from 'react-bootstrap';
 import history from '../history';
 import { Link } from 'react-router-dom';
+import config from '../config/config';
 
 
 export default function Header() {
 
     const handleRedirect = () => {
 
-        history.push('/signup')
+        history.push(`${config.BASENAME}/signup`)
     }
 
     return (
         <header className="header-container">
-            <Container  fluid>
+            <Container fluid>
                 <Navbar className="py-3 d-flex" collapseOnSelect expand="lg" bg="white" variant="light">
                     <Navbar.Brand href="#home">
                         <Link id='brand-logo' to='/'>PakAdvocates</Link>
