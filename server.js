@@ -54,10 +54,10 @@ app.get(`${config.BASENAME}/*`, (req, res) => {
 
 const db = require('./app/models')
 
-db.sequelize.sync({ force: true })  //sync db
-    .then(() => {
-        console.log("Drop and re-create all tables.");
-    });
+// db.sequelize.sync({ force: true })  //sync db
+//     .then(() => {
+//         console.log("Drop and re-create all tables.");
+//     });
 
 
 
