@@ -17,7 +17,7 @@ export default function Header() {
             <Container fluid>
                 <Navbar className="py-3 d-flex" collapseOnSelect expand="lg" bg="white" variant="light">
                     <Navbar.Brand href="#home">
-                        <Link id='brand-logo' to='/'>PakAdvocates</Link>
+                        <Link id='brand-logo' to={`${config.BASENAME}`}>PakAdvocates</Link>
                     </Navbar.Brand>
                     <div className="flex-grow-1"></div>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
