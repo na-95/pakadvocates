@@ -22,6 +22,6 @@
 
 // for heroku:
 module.exports = {
-    BASE_URL: "https://https:/pakadvocates.herokuapp.com",
+    BASE_URL: "https://pakadvocates.herokuapp.com",
     BASENAME: '/client'
 };
