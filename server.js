@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const path = require('path');
 
 const cors = require('cors');
-var allowedOrigins = ['http://localhost:3000', 'http://localhost:5000', 'https://pakadvocates.herokuapp.com/'];
+var allowedOrigins = ['http://localhost:3000', 'http://localhost:5000', 'https://pakadvocates.herokuapp.com/', `https://pakadvocates.herokuapp.com/${process.env.PORT}`];
 app.use(cors({
     origin: function (origin, callback) {
 
