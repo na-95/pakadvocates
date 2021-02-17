@@ -33,6 +33,15 @@ app.listen(port, () => { console.log(`Server started on port ${port}`) })
 
 
 
+
+// making the application client build public:
+app.use('/', express.static('client/build'));
+// app.get('/*', (req, res) => {
+//     res.sendFile(path.resolve('client/build/index.html'));
+// });
+
+
+
 // importing and syncing (creating the actual) database:
 
 const db = require('./app/models')
