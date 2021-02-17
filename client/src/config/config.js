@@ -12,7 +12,16 @@
 
 // };
 
+
+
+// for local testing:
+// module.exports = {
+//     BASE_URL: "http://localhost:5000",
+//     BASENAME: '/client'
+// };
+
+// for heroku:
 module.exports = {
-    BASE_URL: "http://localhost:5000",
+    BASE_URL: "https://https://pakadvocates.herokuapp.com/",
     BASENAME: '/client'
 };

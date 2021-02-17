@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const path = require('path');
 
 const cors = require('cors');
-var allowedOrigins = ['http://localhost:3000', 'http://localhost:5000'];
+var allowedOrigins = ['http://localhost:3000', 'http://localhost:5000', 'https://pakadvocates.herokuapp.com/'];
 app.use(cors({
     origin: function (origin, callback) {
 
@@ -54,10 +54,10 @@ app.get(`${config.BASENAME}/*`, (req, res) => {
 
 const db = require('./app/models')
 
-// db.sequelize.sync({ force: true })  //sync db
-//     .then(() => {
-//         console.log("Drop and re-create all tables.");
-//     });
+db.sequelize.sync({ force: true })  //sync db
+    .then(() => {
+        console.log("Drop and re-create all tables.");
+    });
 
 
 
