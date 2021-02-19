@@ -17,11 +17,11 @@ app.use(cors({
 
         if (!origin) return callback(null, true); // allow requests with no origin (like mobile apps or curl requests)
 
-        if (allowedOrigins.indexOf(origin) === -1) {
-            var msg = 'The CORS policy for this site does not ' +
-                'allow access from the specified Origin.';
-            return callback(new Error(msg), false);
-        }
+        // if (allowedOrigins.indexOf(origin) === -1) {
+        //     var msg = 'The CORS policy for this site does not ' +
+        //         'allow access from the specified Origin.';
+        //     return callback(new Error(msg), false);
+        // }
         return callback(null, true);
     }
 }));
@@ -38,7 +38,7 @@ const config = require('./client/src/config/config');
 
 app.use(`${config.BASENAME}`, express.static('client/build'));
 app.get(`${config.BASENAME}/*`, (req, res) => {
-    res.sendFile(path.resolve('client/build/index.html'));
+    res.sendFile(path.resolve(__dirname + '/client/build/index.html'));
 });
 
 
