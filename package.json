@@ -6,7 +6,8 @@
   "scripts": {
     "client": "npm run start --prefix client",
     "server": "node server.js",
-    "nodemon": "nodemon server.js"
+    "nodemon": "nodemon server.js",
+    "build": "npm run build --prefix client"
   },
   "author": "Nouraiz Asad",
   "license": "MIT",
