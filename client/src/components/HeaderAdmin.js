@@ -30,15 +30,15 @@ function HeaderAdmin(props) {
             <Container fluid>
                 <Navbar className="py-3 d-flex" collapseOnSelect expand="lg" bg="white" variant="light">
                     <Navbar.Brand href="#home">
-                        <Link id='brand-logo' to={`${config.BASENAME}/admin/adminpanel`}>PakAdvocates</Link>
+                        <Link id='brand-logo' to='/'>PakAdvocates</Link>
                     </Navbar.Brand>
                     <div className="flex-grow-1"></div>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="ml-auto">
-                            {/* {
+                            {
                                 history.location.pathname !== '/admin/adminpanel' && <Nav.Link onClick={handleRedirect('adminpanel')}>Go Back To Admin Panel</Nav.Link>
-                            } */}
+                            }
                             <Nav.Link onClick={handleRedirect('lawyerrequests')}>View Lawyer Requests</Nav.Link>
                             <Nav.Link onClick={handleRedirect('approvedlawyers')}>View Approved Lawyers</Nav.Link>
                             <Nav.Link onClick={handleRedirect('addcourtcategory')}>Add Court Categories</Nav.Link>

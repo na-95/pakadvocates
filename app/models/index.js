@@ -15,8 +15,8 @@ let sequelize;
 //     sequelize = new Sequelize(config.database, config.username, config.password, config);
 // }
 
-sequelize = new Sequelize('pakadvocates', 'pakadvocatesuser', 'pakistan', {
-    host: 'db4free.net',
+sequelize = new Sequelize('pakadvocates', 'root', '', {
+    host: 'localhost',
     dialect: 'mysql'
 });
 

@@ -11,28 +11,24 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const path = require('path');
 
 const cors = require('cors');
-var allowedOrigins = ['http://localhost:3000', 'http://localhost:5000', 'https://pakadvocates.herokuapp.com/', `https://pakadvocates.herokuapp.com/${process.env.PORT}`];
+var allowedOrigins = ['http://localhost:3000', 'http://localhost:5000'];
 app.use(cors({
     origin: function (origin, callback) {
 
         if (!origin) return callback(null, true); // allow requests with no origin (like mobile apps or curl requests)
 
-        // if (allowedOrigins.indexOf(origin) === -1) {
-        //     var msg = 'The CORS policy for this site does not ' +
-        //         'allow access from the specified Origin.';
-        //     return callback(new Error(msg), false);
-        // }
-
+        if (allowedOrigins.indexOf(origin) === -1) {
+            var msg = 'The CORS policy for this site does not ' +
+                'allow access from the specified Origin.';
+            return callback(new Error(msg), false);
+        }
         return callback(null, true);
     }
 }));
 
-const port = process.env.PORT || 5000;
+const port = 5000;
 
 app.listen(port, () => { console.log(`Server started on port ${port}`) })
-
-
-
 
 
 
@@ -41,16 +37,9 @@ app.listen(port, () => { console.log(`Server started on port ${port}`) })
 const config = require('./client/src/config/config');
 
 app.use(`${config.BASENAME}`, express.static('client/build'));
-app.get(`/`, (req, res) => {
-    res.redirect(`${config.BASENAME}`);
-})
 app.get(`${config.BASENAME}/*`, (req, res) => {
     res.sendFile(path.resolve('client/build/index.html'));
 });
-
-
-
-
 
 
 
