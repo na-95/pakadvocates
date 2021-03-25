@@ -53,6 +53,7 @@ db.Admin = require('./Admin')(sequelize, Sequelize);
 db.Lawyer = require('./Lawyer')(sequelize, Sequelize);
 db.Court_Category = require('./Court_Category')(sequelize, Sequelize);
 db.Court = require('./Court')(sequelize, Sequelize);
+db.Client = require('./Client')(sequelize, Sequelize);
 
 // example associations:
 // db.users.belongsTo(db.shops, { onDelete: "CASCADE", foreignKey: "shopId" } );

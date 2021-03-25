@@ -37,8 +37,11 @@ app.listen(port, () => { console.log(`Server started on port ${port}`) })
 const config = require('./client/src/config/config');
 
 app.use(`${config.BASENAME}`, express.static('client/build'));
+app.get(`/`, (req, res) => {
+    res.redirect(`${config.BASENAME}`);
+})
 app.get(`${config.BASENAME}/*`, (req, res) => {
-    res.sendFile(path.resolve(__dirname + '/client/build/index.html'));
+    res.sendFile(path.resolve('client/build/index.html'));
 });
 
 
@@ -63,5 +66,6 @@ const db = require('./app/models')
 // API routes/endpoints with services:
 
 app.use('/api/lawyer', require('./app/routes/Lawyer-routes'));  // this imports the router (aka the mini app) whenever the basename/api/lawyer url is requested.
-app.use('/api/admin', require('./app/routes/Admin-routes'));  // this imports the router (aka the mini app) whenever the basename/api/lawyer url is requested.
-app.use('/api/courtCategory', require('./app/routes/Court_Category-routes'));  // this imports the router (aka the mini app) whenever the basename/api/lawyer url is requested.
+app.use('/api/client', require('./app/routes/Client-routes'));  // this imports the router (aka the mini app) whenever the basename/api/client url is requested.
+app.use('/api/admin', require('./app/routes/Admin-routes'));  // this imports the router (aka the mini app) whenever the basename/api/admin url is requested.
+app.use('/api/courtCategory', require('./app/routes/Court_Category-routes'));  // this imports the router (aka the mini app) whenever the basename/api/courtCategory url is requested.

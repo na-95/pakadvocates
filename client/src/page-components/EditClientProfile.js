@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Container } from 'react-bootstrap';
 import { connect } from "react-redux";
-import { postLawyer, postClient } from '../actions';
+import { postLawyer } from '../actions';
 
-class SignUp extends Component {
+class EditClientProfile extends Component {
 
     state = {
         firstName: '',
@@ -31,22 +31,6 @@ class SignUp extends Component {
         // cancel submit if passwords dont match:
         if (this.state.password !== this.state.repeatPassword) {
             alert("Passwords don't match. Please try again.");
-            return;
-        }
-
-        if (this.state.userType === 'client') {
-            let client = {
-                first_name: this.state.firstName,
-                last_name: this.state.lastName,
-                email: this.state.email,
-                phone_number: this.state.phoneNumber,
-                password: this.state.password,
-                cnic: this.state.cnic
-            }
-
-            // post new client
-            this.props.postClient(client, '/thankyou')
-
             return;
         }
 
@@ -143,4 +127,4 @@ class SignUp extends Component {
     }
 }
 
-export default connect(null, { postLawyer, postClient })(SignUp)
+export default connect(null, { postLawyer })(EditClientProfile)

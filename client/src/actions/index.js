@@ -65,6 +65,19 @@ export const getApprovedLawyers = () => dispatch => {
 
 }
 
+export const postClient = (client, path) => dispatch => {
+
+    API.post('/client/', client)
+        .then(res => {
+            console.log('New client created:', res.data);
+            history.push(config.BASENAME + path);
+        })
+        .catch(err => {
+            console.log('Error: Could not create new client.');
+        })
+
+}
+
 export const adminLoginVerify = (admin, path) => dispatch => {
 
     return API.post('/admin/login', admin)

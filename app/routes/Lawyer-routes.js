@@ -12,7 +12,8 @@ router.post('/', (req, res) => {
         email: req.body.email,
         phone_number: req.body.phone_number,
         password: req.body.password,
-        approval_status: req.body.approval_status
+        approval_status: req.body.approval_status,
+        cnic: req.body.cnic
     };
 
     Lawyer.create(lawyer)

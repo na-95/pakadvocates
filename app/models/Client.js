@@ -1,5 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-    const Lawyer = sequelize.define("Lawyer", {
+
+    const Client = sequelize.define("Client", {
         id: {
             autoIncrement: true,
             type: DataTypes.INTEGER,
@@ -11,15 +12,15 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
 
         },
-        approval_status: {
-            type: DataTypes.BOOLEAN,
-            allowNull: true,
-        },
         last_name: {
             type: DataTypes.STRING,
             allowNull: false,
         },
         phone_number: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        password: {
             type: DataTypes.STRING,
             allowNull: false,
         },
@@ -31,15 +32,12 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        password: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
+
     }, {
         freezeTableName: true
     })
 
-    return Lawyer;
+    return Client;
 }
 
-// module.exports = Lawyer;
+// module.exports = Admin;
