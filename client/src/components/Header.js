@@ -38,8 +38,8 @@ export default class Header extends Component {
                                 </Button>
                                 <Button onClick={this.toggleCLogin} className="mx-1 btn-primary ">
                                     Client Login
-                                {/* Login modal: */}
                                 </Button>
+                                {/* client login modal: */}
                                 {this.state.isCLoginOpen ? <ClientLogin show={this.state.isCLoginOpen} onHide={this.toggleCLogin} /> : <></>}
                                 <Button className="mx-1 btn-primary ">
                                     Lawyer Login

@@ -1,23 +1,45 @@
+import axios from 'axios';
 import React, { Component } from 'react';
 import { Container } from 'react-bootstrap';
 import { connect } from "react-redux";
-import { postLawyer } from '../actions';
+import { patchClient, loginClient } from '../actions';
+
+let clientId;
+let firstName;
+let lastName;
+let email;
+let phoneNumber;
+let cnic;
+
+const mapStateToProps = state => {
+    clientId = state.ClientReducer.client.id;
+    firstName = state.ClientReducer.client.first_name;
+    lastName = state.ClientReducer.client.last_name;
+    email = state.ClientReducer.client.email;
+    phoneNumber = state.ClientReducer.client.phone_number;
+    cnic = state.ClientReducer.client.cnic;
+
+    return state
+}
 
 class EditClientProfile extends Component {
 
     state = {
-        firstName: '',
-        lastName: '',
-        email: '',
-        phoneNumber: '',
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        phoneNumber: phoneNumber,
         userType: '',
         password: '',
-        cnic: '',
-        repeatPassword: ''
+        cnic: cnic,
+        repeatPassword: '',
+
+        isEditedFlag: false
     }
 
     handleForm = (e) => {
         this.setState({
+            isEditedFlag: true,
             [e.target.name]: e.target.value
         },
             () => {
@@ -25,7 +47,7 @@ class EditClientProfile extends Component {
             })
     }
 
-    submitForm = (e) => {
+    submitForm = async (e) => {
         e.preventDefault()
 
         // cancel submit if passwords dont match:
@@ -34,18 +56,30 @@ class EditClientProfile extends Component {
             return;
         }
 
-        let lawyer = {
+        let client = {
             first_name: this.state.firstName,
             last_name: this.state.lastName,
             email: this.state.email,
             phone_number: this.state.phoneNumber,
-            password: this.state.password,
-            approval_status: 0,
-            cnic: this.state.cnic
+            // password: this.state.password,
+            cnic: this.state.cnic,
         }
 
-        // call action that makes the API post call:
-        this.props.postLawyer(lawyer, '/thankyou')
+        try {
+
+            // patch client request:
+            let { data: patchedClient } = await this.props.patchClient(client, clientId);
+            delete patchedClient.password;
+
+            // store patched client in redux:
+            this.props.loginClient(patchedClient);
+            this.setState({ isEditedFlag: false })
+            alert('Your information was updated successfully.')
+
+        } catch (err) {
+            console.log('Error. Could not patch client.')
+        }
+
     }
 
     render() {
@@ -53,33 +87,33 @@ class EditClientProfile extends Component {
             <Container className="py-4 ">
                 <div className="card bg-light">
                     <article className="card-body mx-auto" style={{ maxWidth: '400px' }}>
-                        <h4 className="card-title mt-3 text-center">Create Account</h4>
-                        <p className="text-center">Get started with your free <b>PakAdvocates</b> account</p>
+                        <h4 className="card-title mt-3 text-center">Edit Profile</h4>
+                        <p className="text-center">Edit details of your <b>PakAdvocates</b> account</p>
                         <hr />
                         <form onSubmit={this.submitForm}>
                             <div className="form-group input-group">
                                 <div className="input-group-prepend">
                                     <span className="input-group-text"> <i className="fa fa-user"></i> </span>
                                 </div>
-                                <input onChange={this.handleForm} required name="firstName" className="form-control" placeholder="First name" type="text" />
+                                <input onChange={this.handleForm} required name="firstName" value={this.state.firstName} className="form-control" placeholder="First name" type="text" />
                             </div>
                             <div className="form-group input-group">
                                 <div className="input-group-prepend">
                                     <span className="input-group-text"> <i className="fa fa-user"></i> </span>
                                 </div>
-                                <input onChange={this.handleForm} required name="lastName" className="form-control" placeholder="Last name" type="text" />
+                                <input onChange={this.handleForm} required name="lastName" value={this.state.lastName} className="form-control" placeholder="Last name" type="text" />
                             </div>
                             <div className="form-group input-group">
                                 <div className="input-group-prepend">
                                     <span className="input-group-text"> <i className="fa fa-envelope"></i> </span>
                                 </div>
-                                <input onChange={this.handleForm} required name="email" className="form-control" placeholder="Email address" type="email" />
+                                <input onChange={this.handleForm} required name="email" value={this.state.email} className="form-control" placeholder="Email address" type="email" />
                             </div>
                             <div className="form-group input-group">
                                 <div className="input-group-prepend">
                                     <span className="input-group-text"> <i className="fa fa-envelope"></i> </span>
                                 </div>
-                                <input onChange={this.handleForm} required name="cnic" className="form-control" placeholder="CNIC" type="text" />
+                                <input onChange={this.handleForm} required name="cnic" value={this.state.cnic} className="form-control" placeholder="CNIC" type="text" />
                             </div>
                             <div className="form-group input-group">
                                 <div className="input-group-prepend">
@@ -91,9 +125,9 @@ class EditClientProfile extends Component {
                                     <option value="2">+198</option>
                                     <option value="3">+701</option> */}
                                 </select>
-                                <input onChange={this.handleForm} required name="phoneNumber" className="form-control" placeholder="Phone number" type="text" />
+                                <input onChange={this.handleForm} required name="phoneNumber" value={this.state.phoneNumber} className="form-control" placeholder="Phone number" type="text" />
                             </div>
-                            <div className="form-group input-group">
+                            {/* <div className="form-group input-group">
                                 <div className="input-group-prepend">
                                     <span className="input-group-text"> <i className="fa fa-building"></i> </span>
                                 </div>
@@ -102,8 +136,8 @@ class EditClientProfile extends Component {
                                     <option value="client">Client</option>
                                     <option value="lawyer">Lawyer</option>
                                 </select>
-                            </div>
-                            <div className="form-group input-group">
+                            </div> */}
+                            {/* <div className="form-group input-group">
                                 <div className="input-group-prepend">
                                     <span className="input-group-text"> <i className="fa fa-lock"></i> </span>
                                 </div>
@@ -114,11 +148,10 @@ class EditClientProfile extends Component {
                                     <span className="input-group-text"> <i className="fa fa-lock"></i> </span>
                                 </div>
                                 <input onChange={this.handleForm} name="repeatPassword" required className="form-control" placeholder="Repeat password" type="password" />
-                            </div>
+                            </div> */}
                             <div className="form-group">
-                                <button type="submit" className="btn btn-primary btn-block"> Create Account  </button>
+                                <button type="submit" disabled={!this.state.isEditedFlag} className="btn btn-primary btn-block">Update Profile</button>
                             </div>
-                            <p className="text-center">Have an account? <a href="">Log In</a> </p>
                         </form>
                     </article>
                 </div>
@@ -127,4 +160,4 @@ class EditClientProfile extends Component {
     }
 }
 
-export default connect(null, { postLawyer })(EditClientProfile)
+export default connect(mapStateToProps, { patchClient, loginClient })(EditClientProfile)

@@ -2,15 +2,22 @@ import React, { Component } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import config from '../config/config';
+import { clientLoginVerify } from '../actions';
+import { connect } from 'react-redux';
 
-export default class ClientLogin extends Component {
+class ClientLogin extends Component {
 
     state = {
+        username: '',
+        password: '',
 
+        loginFailFlag: false,
+        invalidMessage: 'Invalid username or password. Try again.'
     }
 
     handleForm = (e) => {
         this.setState({
+            loginFailFlag: false,
             [e.target.name]: e.target.value
         },
             () => {
@@ -18,27 +25,21 @@ export default class ClientLogin extends Component {
             })
     }
 
-    submitForm = (e) => {
+    postForm = async (e) => {
         e.preventDefault()
 
-        // // cancel submit if passwords dont match:
-        // if (this.state.password !== this.state.repeatPassword) {
-        //     alert("Passwords don't match. Please try again.");
-        //     return;
-        // }
+        let client = {
+            username: this.state.username,
+            password: this.state.password,
+        }
 
-        // let lawyer = {
-        //     first_name: this.state.firstName,
-        //     last_name: this.state.lastName,
-        //     email: this.state.email,
-        //     phone_number: this.state.phoneNumber,
-        //     password: this.state.password,
-        //     approval_status: 0,
-        //     cnic: this.state.cnic
-        // }
-
-        // // call action that makes the API post call:
-        // this.props.postLawyer(lawyer, '/thankyou')
+        // verify client:
+        await this.props.clientLoginVerify(client, '/admin/adminpanel')
+            .catch(err => {
+                this.setState({
+                    loginFailFlag: true
+                })
+            })
     }
 
     render() {
@@ -53,12 +54,12 @@ export default class ClientLogin extends Component {
                             <h4 className="card-title mt-3 text-center">Login</h4>
                             <p className="text-center">Login to your <b>PakAdvocates</b> account</p>
                             <hr />
-                            <form onSubmit={this.submitForm}>
+                            <form onSubmit={this.postForm}>
                                 <div className="form-group input-group">
                                     <div className="input-group-prepend">
                                         <span className="input-group-text"> <i className="fa fa-envelope"></i> </span>
                                     </div>
-                                    <input onChange={this.handleForm} required name="email" className="form-control" placeholder="Email address" type="email" />
+                                    <input onChange={this.handleForm} required name="username" className="form-control" placeholder="Email address" type="email" />
                                 </div>
                                 <div className="form-group input-group">
                                     <div className="input-group-prepend">
@@ -78,3 +79,5 @@ export default class ClientLogin extends Component {
         )
     }
 }
+
+export default connect(null, { clientLoginVerify })(ClientLogin)

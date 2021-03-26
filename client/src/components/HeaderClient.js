@@ -3,9 +3,10 @@ import { Navbar, Button, Nav, Form, FormControl, NavDropdown, Container } from '
 import history from '../history';
 import { Link } from 'react-router-dom';
 import config from '../config/config';
+import { connect } from 'react-redux';
+import { logoutClient } from '../actions'
 
-
-export default function HeaderClient() {
+function HeaderClient(props) {
 
     const handleRedirect = (path) => () => {
 
@@ -27,8 +28,8 @@ export default function HeaderClient() {
                                 Edit Profile
                                 {/* <Nav.Link href="#features">Sign Up</Nav.Link> */}
                             </Button>
-                            <Button className="mx-1 btn-primary ">
-                                Login
+                            <Button onClick={props.logoutClient} className="mx-1 btn-primary ">
+                                Logout
                                 {/* <Nav.Link href="#pricing">Login</Nav.Link> */}
                             </Button>
                             {/* <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
@@ -45,3 +46,5 @@ export default function HeaderClient() {
         </header>
     )
 }
+
+export default connect(null, { logoutClient })(HeaderClient);

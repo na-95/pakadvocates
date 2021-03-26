@@ -78,6 +78,50 @@ export const postClient = (client, path) => dispatch => {
 
 }
 
+export const clientLoginVerify = (client, path) => dispatch => {
+
+    return API.post('/client/login', client)
+        .then(res => {
+            console.log('client found:', res.data);
+            // history.push(config.BASENAME + path);
+
+            let { data: client } = res;
+
+            delete client.password;
+
+            dispatch({
+                type: 'CLIENT_LOGIN',
+                client
+            })
+        })
+
+}
+
+export const loginClient = (client) => {
+    return (
+        {
+            type: 'CLIENT_LOGIN',
+            client
+        }
+    )
+}
+
+export const logoutClient = () => {
+
+    history.push(config.BASENAME);
+
+    return (
+        {
+            type: 'CLIENT_LOGOUT',
+        }
+    )
+}
+
+export const patchClient = (client, clientId) => async dispatch => {
+    return API.patch(`/client/${clientId}`, client)
+}
+
+
 export const adminLoginVerify = (admin, path) => dispatch => {
 
     return API.post('/admin/login', admin)

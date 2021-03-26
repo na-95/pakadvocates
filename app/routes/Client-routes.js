@@ -28,6 +28,54 @@ router.post('/', (req, res) => {
         });
 })
 
+// client login verification: 
+router.post('/login', exports.LoginVerify = async (req, res) => {
+
+    const username = req.body.username;
+    const userpassword = req.body.password;
+
+    Client.findAll({ where: { email: username, password: userpassword } })
+        .then(data => {
+            [client] = data;
+
+            if (client.email == username && client.password == userpassword)
+                res.send(client)
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "request failed."
+            });
+        });
+})
+
+// patch client:
+router.patch('/:clientId', (req, res) => {
+    const id = req.params.clientId;
+
+    Client.update(req.body, {
+        where: { id: id }
+    })
+        .then(num => {
+            if (num == 1) {
+                Client.findByPk(id)
+                    .then(client => {
+                        res.send(client);
+                    })
+            } else {
+                res.send({
+                    message: `Cannot update client with id=${id}. Please check client Id.`
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Error approving client with id=" + id
+            });
+        });
+})
+
 // // GET unapproved lawyers:
 // router.get('/byApprovalStatus/:approvalStatus', async (req, res) => {
 //     const approvalStatus = req.params.approvalStatus;
@@ -70,30 +118,5 @@ router.post('/', (req, res) => {
 //         });
 // })
 
-// // Update lawyer:
-// router.put('/:lawyerId', (req, res) => {
-//     const id = req.params.lawyerId;
-
-//     Lawyer.update(req.body, {
-//         where: { id: id }
-//     })
-//         .then(num => {
-//             if (num == 1) {
-//                 res.send({
-//                     message: "Lawyer was updated successfully."
-//                 });
-//             } else {
-//                 res.send({
-//                     message: `Cannot update Lawyer with id=${id}. Please check Lawyer Id.`
-//                 });
-//             }
-//         })
-//         .catch(err => {
-//             res.status(500).send({
-//                 message:
-//                     err.message || "Error approving Lawyer with id=" + id
-//             });
-//         });
-// })
 
 module.exports = router;
