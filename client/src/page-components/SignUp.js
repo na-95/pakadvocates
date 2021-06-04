@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import { Container } from 'react-bootstrap';
 import { connect } from "react-redux";
 import { postLawyer, postClient } from '../actions';
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from '@stripe/react-stripe-js';
+import CheckoutForm from '../components/CheckoutForm';
+
+const STRIPE_PUBLISHABLE_KEY = "pk_test_51IxbINDQXmzBjZGU95aFDcWvGRALJLvpNsxxLvYIl2uSsCZ4KlTm94Gz3jt4Vr3gyZtqKm0AKqo2bJLCiCCqw1ja00URCmorR1"
+const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY);
 
 class SignUp extends Component {
 
@@ -13,7 +19,8 @@ class SignUp extends Component {
         userType: '',
         password: '',
         cnic: '',
-        repeatPassword: ''
+        repeatPassword: '',
+        isPaid: false
     }
 
     handleForm = (e) => {
@@ -25,12 +32,26 @@ class SignUp extends Component {
             })
     }
 
+    setIsPaid = (bool) => {
+        // e.preventDefault();
+        // alert('hi btich')
+        this.setState({
+            isPaid: bool
+        }, () => { console.log(this.state.isPaid) })
+
+    }
+
     submitForm = (e) => {
         e.preventDefault()
 
         // cancel submit if passwords dont match:
         if (this.state.password !== this.state.repeatPassword) {
             alert("Passwords don't match. Please try again.");
+            return;
+        }
+        // cancel submit if unpaid:
+        if (this.state.userType == 'client' && !this.state.isPaid) {
+            alert("Please pay the registration fee before signing up.");
             return;
         }
 
@@ -134,8 +155,19 @@ class SignUp extends Component {
                             <div className="form-group">
                                 <button type="submit" className="btn btn-primary btn-block"> Create Account  </button>
                             </div>
-                            <p className="text-center">Have an account? <a href="">Log In</a> </p>
                         </form>
+                        {
+                            this.state.userType === 'client' &&
+                            <div className="form-group">
+                                <Elements stripe={stripePromise}>
+                                    {/* <form onSubmit={this.handlePayment}> */}
+                                    <CheckoutForm setIsPaid={this.setIsPaid} />
+                                    {/* <button type="submit" className="btn-pay btn btn-primary btn-block mt-2">Pay Now</button> */}
+                                    {/* </form> */}
+                                </Elements>
+                            </div>
+                        }
+                        <p className="text-center">Have an account? <a href="">Log In</a> </p>
                     </article>
                 </div>
             </Container>

@@ -47,7 +47,6 @@ app.get(`${config.BASENAME}/*`, (req, res) => {
 
 
 // importing and syncing (creating the actual) database:
-
 const db = require('./app/models')
 
 // db.sequelize.sync({ force: true })  //sync db

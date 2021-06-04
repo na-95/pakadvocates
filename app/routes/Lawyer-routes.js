@@ -31,7 +31,7 @@ router.post('/', (req, res) => {
 // GET unapproved lawyers:
 router.get('/byApprovalStatus/:approvalStatus', async (req, res) => {
     const approvalStatus = req.params.approvalStatus;
-
+    console.log(approvalStatus)
     Lawyer.findAll({ where: { approval_status: approvalStatus } })
         .then(data => {
             res.send(data);

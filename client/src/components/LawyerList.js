@@ -1,7 +1,17 @@
+import API from '../api/jsonPlaceholder'
 import React, { Component } from 'react'
 import { Button, Modal } from 'react-bootstrap'
+import { connect } from "react-redux";
 
-export default class LawyerList extends Component {
+let isClientLoggedIn;
+const mapStateToProps = state => {
+
+    isClientLoggedIn = state.ClientReducer.isClientLoggedIn;
+
+    return state;
+}
+
+class LawyerList extends Component {
     state = {
         showModal: false,
         lawyers: [
@@ -44,6 +54,19 @@ export default class LawyerList extends Component {
 
     }
 
+    componentDidMount = () => {
+        API.get(`/lawyer/byApprovalStatus/1`)
+            .then(res => {
+                console.log('approved lawyers', res)
+                res.data.forEach((l, index) => { l.lawFirm = "Zulifqar Associates"; if (index > 2) { l.lawFirm = "Zaffar and Associates" } })
+                this.setState({ lawyers: [...res.data] })
+            },
+                err => {
+                    console.log('error getting approved lawyers')
+                })
+
+    }
+
     toggleModal = (lawyer) => () => {
         if (lawyer)
             this.setState({ showModal: !this.state.showModal, selectedLawyer: lawyer })
@@ -69,13 +92,21 @@ export default class LawyerList extends Component {
                         </Button>
                     </Modal.Footer>
                 </Modal>
+                {
+                    isClientLoggedIn &&
+                    <>
+                        <h1 className='text-left h1'>Search Lawyers</h1>
+                        <br></br>
+                    </>
+                }
                 <ul className="m-0 p-0 list-group">
                     {
+                        isClientLoggedIn &&
                         this.state.lawyers.map(lawyer => (
                             <li className="list-group-item py-4">
                                 <div className="row">
-                                    <div className="col text-left">{lawyer.name}</div>
-                                    <div className="col text-left">{lawyer.phone}</div>
+                                    <div className="col text-left">{lawyer.first_name + ' ' + lawyer.last_name}</div>
+                                    <div className="col text-left">{lawyer.phone_number}</div>
                                     <div className="col text-left">{lawyer.lawFirm}</div>
                                     <div className="col justify-content-center d-flex">
                                         <button className="btn btn-outline-dark">view profile</button>
@@ -92,3 +123,6 @@ export default class LawyerList extends Component {
         )
     }
 }
+
+
+export default connect(mapStateToProps, null)(LawyerList);
