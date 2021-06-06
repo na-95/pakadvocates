@@ -82,7 +82,7 @@ class SignUp extends Component {
         }
 
         // call action that makes the API post call:
-        this.props.postLawyer(lawyer, '/thankyou')
+        this.props.postLawyer(lawyer, `/thankyou?user-type=${this.state.userType}`)
     }
 
     render() {

@@ -1,7 +1,7 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Route, Switch } from 'react-router-dom';
-import { Router } from "react-router";
+import { Redirect, Router } from "react-router";
 import { store } from './store';
 import { Provider } from "react-redux";
 import './custom-css/custom.css'
@@ -21,10 +21,23 @@ function App(props) {
       <Provider store={store}>
         <Router history={history}>
           <Switch>
+
+            {/* Redirect to Client by default: */}
+            <Route exact path="/">
+              {<Redirect to={`${config.BASENAME}/`} />}
+            </Route>
+
+            {/* Redirect to /admin to /client/admin: */}
+            <Route exact path="/admin">
+              {<Redirect to={`${config.BASENAME}/admin`} />}
+            </Route>
+
             {/* Admin Routes: */}
             <Route path={`${config.BASENAME}/admin`} render={(props) => (<AdminRoutes {...props} />)} />
+
             {/* Client Routes: */}
             <Route path={`${config.BASENAME}/`} render={(props) => (<ClientRoutes {...props} />)} />
+            
           </Switch>
         </Router>
       </Provider>
