@@ -46,9 +46,8 @@ app.get(`${config.BASENAME}/*`, (req, res) => {
 
 
 
-// importing and syncing (creating the actual) database:
+// syncing the db model with the actual database:
 const db = require('./app/models')
-
 // db.sequelize.sync({ force: true })  //sync db
 //     .then(() => {
 //         console.log("Drop and re-create all tables.");

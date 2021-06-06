@@ -82,6 +82,7 @@ db.Client.hasMany(db.Client_Request, { foreignKey: "client_id", onDelete: 'casca
 db.Client.hasMany(db.Payment, { foreignKey: "client_id", onDelete: 'cascade', hooks: true });
 db.Client.hasMany(db.Invoice, { foreignKey: "client_id", onDelete: 'cascade', hooks: true });
 db.Client.hasMany(db.Client_Proposal, { foreignKey: "client_id", onDelete: 'cascade', hooks: true });
+db.Client_Proposal_Status.hasMany(db.Client_Proposal, { foreignKey: "client_proposal_status_id", onDelete: 'cascade', hooks: true });
 db.Client.hasMany(db.Meeting, { foreignKey: "client_id", onDelete: 'cascade', hooks: true });
 db.Meeting_Status.hasMany(db.Meeting, { foreignKey: "meeting_status_id", onDelete: 'cascade', hooks: true });
 db.Invoice.hasMany(db.Payment, { foreignKey: "invoice_id", onDelete: 'cascade', hooks: true });
