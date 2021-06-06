@@ -28,6 +28,22 @@ router.post('/', (req, res) => {
         });
 })
 
+// Get Client
+router.get('/:clientId', async (req, res) => {
+    const clientId = req.params.clientId;
+
+    Client.findAll({ where: { id: clientId } })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Error getting client."
+            });
+        });
+})
+
 // client login verification: 
 router.post('/login', exports.LoginVerify = async (req, res) => {
 

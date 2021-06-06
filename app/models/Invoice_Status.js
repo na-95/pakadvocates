@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true
         },
         invoice_status: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: false,
 
         },

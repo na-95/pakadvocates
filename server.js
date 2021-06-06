@@ -67,3 +67,5 @@ app.use('/api/lawyer', require('./app/routes/Lawyer-routes'));  // this imports 
 app.use('/api/client', require('./app/routes/Client-routes'));  // this imports the router (aka the mini app) whenever the basename/api/client url is requested.
 app.use('/api/admin', require('./app/routes/Admin-routes'));  // this imports the router (aka the mini app) whenever the basename/api/admin url is requested.
 app.use('/api/courtCategory', require('./app/routes/Court_Category-routes'));  // this imports the router (aka the mini app) whenever the basename/api/courtCategory url is requested.
+app.use('/api/clientProposal', require('./app/routes/Client_Proposal-routes'));  // this imports the router (aka the mini app) whenever the basename/api/clientProposal url is requested.
+app.use('/api/case', require('./app/routes/Case-routes'));  // this imports the router (aka the mini app) whenever the basename/api/case url is requested.

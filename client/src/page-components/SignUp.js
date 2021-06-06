@@ -50,7 +50,7 @@ class SignUp extends Component {
             return;
         }
         // cancel submit if unpaid:
-        if (this.state.userType == 'client' && !this.state.isPaid) {
+        if (!this.state.isPaid) {
             alert("Please pay the registration fee before signing up.");
             return;
         }
@@ -156,8 +156,8 @@ class SignUp extends Component {
                                 <button type="submit" className="btn btn-primary btn-block"> Create Account  </button>
                             </div>
                         </form>
-                        {
-                            this.state.userType === 'client' &&
+                        {/* { */}
+                            {/* this.state.userType === 'client' && */}
                             <div className="form-group">
                                 <Elements stripe={stripePromise}>
                                     {/* <form onSubmit={this.handlePayment}> */}
@@ -166,7 +166,7 @@ class SignUp extends Component {
                                     {/* </form> */}
                                 </Elements>
                             </div>
-                        }
+                        {/* } */}
                         <p className="text-center">Have an account? <a href="">Log In</a> </p>
                     </article>
                 </div>

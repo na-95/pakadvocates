@@ -1,6 +1,9 @@
 const defaultState = {
     unapprovedLawyers: [],
     approvedLawyers: [],
+
+    isLawyerLoggedIn: false,
+    lawyer: {},
 };
 
 const LawyerReducer = (state = defaultState, action) => {
@@ -14,6 +17,17 @@ const LawyerReducer = (state = defaultState, action) => {
             return {
                 ...state,
                 approvedLawyers: [...action.approvedLawyers]
+            }
+        case "LAWYER_LOGIN":
+            return {
+                ...state,
+                isLawyerLoggedIn: true,
+                lawyer: action.lawyer
+            }
+        case "LAWYER_LOGOUT":
+            return {
+                isLawyerLoggedIn: false,
+                lawyer: {}
             }
         default:
             return state;

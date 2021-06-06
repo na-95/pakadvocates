@@ -97,11 +97,39 @@ export const clientLoginVerify = (client, path) => dispatch => {
 
 }
 
+export const lawyerLoginVerify = (lawyer, path) => dispatch => {
+
+    return API.post('/lawyer/login', lawyer)
+        .then(res => {
+            console.log('lawyer found:', res.data);
+            // history.push(config.BASENAME + path);
+
+            let { data: lawyer } = res;
+
+            delete lawyer.password;
+
+            dispatch({
+                type: 'LAWYER_LOGIN',
+                lawyer
+            })
+        })
+
+}
+
 export const loginClient = (client) => {
     return (
         {
             type: 'CLIENT_LOGIN',
             client
+        }
+    )
+}
+
+export const loginLawyer = (lawyer) => {
+    return (
+        {
+            type: 'LAWYER_LOGIN',
+            lawyer
         }
     )
 }
@@ -113,6 +141,17 @@ export const logoutClient = () => {
     return (
         {
             type: 'CLIENT_LOGOUT',
+        }
+    )
+}
+
+export const logoutLawyer = () => {
+
+    history.push(config.BASENAME);
+
+    return (
+        {
+            type: 'LAWYER_LOGOUT',
         }
     )
 }

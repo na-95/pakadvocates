@@ -4,11 +4,13 @@ import { Link } from 'react-router-dom';
 import config from '../config/config';
 import ClientLogin from './ClientLogin';
 import React, { Component } from 'react'
+import LawyerLogin from './LawyerLogin';
 
 export default class Header extends Component {
 
     state = {
         isCLoginOpen: false,
+        isLLoginOpen: false,
     }
 
     handleRedirect = () => {
@@ -18,6 +20,11 @@ export default class Header extends Component {
     toggleCLogin = () => {
         this.setState({
             isCLoginOpen: !this.state.isCLoginOpen
+        })
+    }
+    toggleLLogin = () => {
+        this.setState({
+            isLLoginOpen: !this.state.isLLoginOpen
         })
     }
     render() {
@@ -36,15 +43,18 @@ export default class Header extends Component {
                                     Register
                                 {/* <Nav.Link href="#features">Sign Up</Nav.Link> */}
                                 </Button>
+
                                 <Button onClick={this.toggleCLogin} className="mx-1 btn-primary ">
                                     Client Login
                                 </Button>
                                 {/* client login modal: */}
                                 {this.state.isCLoginOpen ? <ClientLogin show={this.state.isCLoginOpen} onHide={this.toggleCLogin} /> : <></>}
-                                <Button onClick={this.toggleCLogin} className="mx-1 btn-primary ">
+
+                                {/* lawyer login modal */}
+                                <Button onClick={this.toggleLLogin} className="mx-1 btn-primary ">
                                     Lawyer Login
-                                {/* {showLawyerLogin ? <ClientLogin show toggleLawyerLogin={toggleLawyerLogin} /> : <></>} */}
                                 </Button>
+                                {this.state.isLLoginOpen ? <LawyerLogin show onHide={this.toggleLLogin} /> : <></>}
                                 {/* <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
                                     <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                                     <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>

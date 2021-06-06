@@ -28,6 +28,27 @@ router.post('/', (req, res) => {
         });
 })
 
+// client login verification: 
+router.post('/login', exports.LoginVerify = async (req, res) => {
+
+    const username = req.body.username;
+    const userpassword = req.body.password;
+
+    Lawyer.findAll({ where: { email: username, password: userpassword } })
+        .then(data => {
+            [lawyer] = data;
+
+            if (lawyer.email == username && lawyer.password == userpassword)
+                res.send(lawyer)
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "request failed."
+            });
+        });
+})
+
 // GET unapproved lawyers:
 router.get('/byApprovalStatus/:approvalStatus', async (req, res) => {
     const approvalStatus = req.params.approvalStatus;

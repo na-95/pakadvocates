@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true
         },
         client_request_status: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: false,
         },
         // last_name: {

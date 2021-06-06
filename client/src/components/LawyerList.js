@@ -5,9 +5,11 @@ import { connect } from "react-redux";
 import LawyerDetailsModal from './LawyerDetailsModal';
 
 let isClientLoggedIn;
+let client;
 const mapStateToProps = state => {
 
     isClientLoggedIn = state.ClientReducer.isClientLoggedIn;
+    client = state.ClientReducer.client;
 
     return state;
 }
@@ -53,7 +55,7 @@ class LawyerList extends Component {
 
         selectedLawyer: {},
 
-        bid: {}
+        // bid: {}
 
     }
 
@@ -96,6 +98,26 @@ class LawyerList extends Component {
         })
     }
 
+    createBid = () => {
+
+        let bid = {
+            client_id: client.id,
+            lawyer_id: this.state.selectedLawyer.id,
+            client_proposal_status_id: 1
+        }
+
+        API.post('/clientProposal/', bid)
+            .then(res => {
+                console.log('New bid created:', res.data);
+                alert('Your bid was sent.');
+                this.toggleModal()();
+            })
+            .catch(err => {
+                console.log('Error: Could not create new bid.');
+                this.toggleModal()();
+            })
+    }
+
     render() {
         return (
             <div>
@@ -112,7 +134,7 @@ class LawyerList extends Component {
                         <Button variant="secondary" onClick={this.toggleModal()}>
                             Cancel
                         </Button>
-                        <Button variant="primary" onClick={this.toggleModal()}>
+                        <Button variant="primary" onClick={this.createBid}>
                             Send Bid
                         </Button>
                     </Modal.Footer>
