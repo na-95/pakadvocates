@@ -22,36 +22,33 @@ class ClientBids extends Component {
     }
 
     getPendingBids = () => {
-        API.get(`/clientProposal/${lawyer.id}`)
-            .then(res => {
-                let pendingBids;
-                let client;
+        let bids;
+        let client;
 
-                res.data.forEach(async b => {
+        API.get(`/clientProposal/${lawyer.id}`)
+            .then(async res => {
+
+                bids = [...res.data]
+
+                // loop through bids to get client details and add them to the bid object:
+                for(let [i, b] of bids.entries()){
                     await this.getClient(b.client_id)
                         .then(res => {
                             client = res.data[0];
                             b.client_id = client.id;
                             b.client_first_name = client.first_name;
                             b.client_last_name = client.last_name;
-                            // b.client_phone = client.phone;
+                            b.client_phone_number = client.phone_number;
                             b.client_email = client.email;
                             b.client_cnic = client.cnic;
-
-                            pendingBids = [...this.state.pendingBids];
-
-                            if(b.client_proposal_status_id === 1)
-                                pendingBids.push(b);
-
-                            this.setState({
-                                pendingBids
-                            }, () => {
-                                console.log(this.state.pendingBids)
-                            })
                         })
-                })
+                }
 
+                // filter to get only the pending bids:
+                bids = bids.filter(bid => (bid.client_proposal_status_id === 1));
 
+                // store bids in state:
+                this.setState({ pendingBids: bids })
             })
             .catch(err => {
                 console.log('err: could not get pending bids');
@@ -109,7 +106,6 @@ class ClientBids extends Component {
 
     render() {
 
-        console.log('fuark', this.state.pendingBids)
         return (
             <Container className="py-4 ">
                 <div className="card bg-light">
@@ -123,7 +119,7 @@ class ClientBids extends Component {
                                     <li key={bid.id.toString()} className='unstyled my-4 list-group'>
                                         <span className="list-group-item">{`${bid.client_first_name} ${bid.client_last_name}`}</span>
                                         <span className="list-group-item">{`${bid.client_email}`}</span>
-                                        {/* <span className="list-group-item">{`${bid.client_phone}`}</span> */}
+                                        <span className="list-group-item">{`${bid.client_phone_number}`}</span>
                                         <span className="list-group-item">{`${bid.client_cnic}`}</span>
                                         <span role="button" className="text-center font-weight-bold text-dark list-group-item list-group-item-success" onClick={this.acceptClientBid(bid.id.toString(), bid.client_id)}>Approve</span>
                                         <span role="button" className="text-center font-weight-bold text-dark list-group-item list-group-item-danger" onClick={this.rejectClientBid(bid.id.toString())}>Reject</span>
