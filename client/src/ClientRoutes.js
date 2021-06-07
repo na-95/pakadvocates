@@ -11,6 +11,8 @@ import HeaderClient from './components/HeaderClient';
 import EditClientProfile from './page-components/EditClientProfile'
 import ClientBids from './page-components/ClientBids'
 import HeaderLawyer from './components/HeaderLawyer'
+import CurrentCasesList from './page-components/CurrentCasesList'
+import CaseDetails from './page-components/CaseDetails'
 
 let isClientLoggedIn;
 let isLawyerLoggedIn;
@@ -33,6 +35,8 @@ function ClientRoutes(props) {
                     <Route exact path={`${config.BASENAME}/thankyou`} component={ThankYou} />
                     <Route exact path={`${config.BASENAME}/editclientprofile`} component={EditClientProfile} />
                     <Route exact path={`${config.BASENAME}/clientbids`} component={ClientBids} />
+                    <Route exact path={`${config.BASENAME}/currentcaseslist`} component={CurrentCasesList} />
+                    <Route exact path={`${config.BASENAME}/casedetails`} component={CaseDetails} />
                 </Switch>
             </main>
         </Router>

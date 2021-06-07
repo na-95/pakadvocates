@@ -4,6 +4,22 @@ const db = require("../models");
 const Lawyer = db.Lawyer;
 const Op = db.Sequelize.Op;
 
+// Get lawyer by id
+router.get('/:lawyerId', async (req, res) => {
+    const lawyerId = req.params.lawyerId;
+
+    Lawyer.findAll({ where: { id: lawyerId } })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Error getting lawyer."
+            });
+        });
+})
+
 // create lawyer:
 router.post('/', (req, res) => {
     const lawyer = {

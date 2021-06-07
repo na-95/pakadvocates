@@ -24,6 +24,9 @@ function HeaderLawyer(props) {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="ml-auto">
+                            <Button onClick={handleRedirect('CurrentCasesList')} className="mx-1 btn-secondary ">
+                                View Cases
+                            </Button>
                             <Button onClick={handleRedirect('ClientBids')} className="mx-1 btn-secondary ">
                                 View Pending Bids
                             </Button>

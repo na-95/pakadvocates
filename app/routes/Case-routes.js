@@ -25,20 +25,36 @@ router.post('/', (req, res) => {
         });
 })
 
-// // GET unapproved cases:
-// router.get('/byApprovalStatus/:approvalStatus', async (req, res) => {
-//     const approvalStatus = req.params.approvalStatus;
-//     console.log(approvalStatus)
-//     case.findAll({ where: { approval_status: approvalStatus } })
-//         .then(data => {
-//             res.send(data);
-//         })
-//         .catch(err => {
-//             res.status(500).send({
-//                 message:
-//                     err.message || "Error getting unapproved cases."
-//             });
-//         });
-// })
+// GET case by id:
+router.get('/byCase/:caseId', async (req, res) => {
+    const caseId = req.params.caseId;
+
+    Case.findAll({ where: { id: caseId } })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Error getting case against this case id."
+            });
+        });
+})
+
+// GET cases:
+router.get('/byLawyer/:lawyerId', async (req, res) => {
+    const lawyerId = req.params.lawyerId;
+
+    Case.findAll({ where: { lawyer_id: lawyerId } })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Error getting unapproved cases."
+            });
+        });
+})
 
 module.exports = router;
